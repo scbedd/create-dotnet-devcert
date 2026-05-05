@@ -1,5 +1,5 @@
 #!/bin/sh
-SAVE=0
+SAVE=1
 
 usage() {
     echo "Usage: $0 [-s]"
@@ -54,11 +54,11 @@ x509_extensions         = x509_ext
 commonName              = localhost
 
 [req_ext]
-basicConstraints        = critical, CA:true
+basicConstraints        = critical, CA:false
 subjectAltName          = @alt_names
 
 [x509_ext]
-basicConstraints        = critical, CA:true
+basicConstraints        = critical, CA:false
 keyUsage                = critical, keyCertSign, cRLSign, digitalSignature,keyEncipherment
 extendedKeyUsage        = critical, serverAuth
 subjectAltName          = critical, @alt_names
