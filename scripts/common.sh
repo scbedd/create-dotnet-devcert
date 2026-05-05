@@ -75,7 +75,7 @@ configure_nssdb() {
 }
 
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $KEYFILE -out $CRTFILE -config $CONF_PATH --passout pass:
-openssl pkcs12 -export -out $PFXFILE -inkey $KEYFILE -in $CRTFILE --passout pass:
+openssl pkcs12 -export -out $PFXFILE -inkey $KEYFILE -in $CRTFILE --passout pass:password
 
 for NSSDB in $NSSDB_PATHS; do
     if [ -d "$NSSDB" ]; then
@@ -88,7 +88,7 @@ if [ "$(id -u)" -ne 0 ]; then
     SUDO='sudo'
 fi
 
-dotnet dev-certs https --clean --import $PFXFILE -p ""
+dotnet dev-certs https --clean --import $PFXFILE -p "password"
 
 if [ "$SAVE" = 1 ]; then
    cp $CRTFILE $HOME
